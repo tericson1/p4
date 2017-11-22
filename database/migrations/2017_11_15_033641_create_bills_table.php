@@ -17,9 +17,9 @@ class CreateBillsTable extends Migration
       $table->increments('id');
       $table->timestamps();
 
-      $table->string('billsource');
+      $table->string('source');
       $table->float('amount');
-      $table->date('datedue');
+      $table->date('due');
       $table->boolean('paid');
 
     });

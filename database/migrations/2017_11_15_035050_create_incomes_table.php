@@ -17,8 +17,8 @@ class CreateIncomesTable extends Migration
       $table->increments('id');
       $table->timestamps();
 
-      $table->string('incomesource');
-      $table->float('incomeamount');
+      $table->string('source');
+      $table->float('amount');
       $table->date('daterecieved');
     });
   }
