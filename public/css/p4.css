@@ -1,0 +1,73 @@
+header {
+    text-align:center;
+    margin-top:20px;
+    color:#3c763d;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    text-align:center;
+ /* Should be removed. Only for demonstration */
+}
+
+.column2 {
+    float: left;
+    width: 33.3%;
+
+ /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+form {
+  margin-left: 25%;
+  margin-right:25%;
+  width: 50%;
+
+color:#3c763d;
+ background-color: #3CBC8D;
+text-align:center;
+ }
+
+label{
+  display: block;
+  float: left;
+  width : 120px;
+
+}
+
+input[type=text] {
+    text-align:center;
+}
+
+h1 {    text-align: center;
+font-family: "Tahoma";
+color:#3c763d !Important;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+ul {    text-align:center;
+    color:red;
+
+
+}
+
+footer {text-align: center;}
+
+.errs {
+color:#3c763d;
+}
