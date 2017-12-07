@@ -39,6 +39,7 @@ Route::get('/env', function () {
 });
 
 Route::get('/balval', 'MoneyController@balanceval');
+Route::get('/bills', 'MoneyController@bills');
 Route:: get ('/', 'MoneyController@index');
 Route:: get ('/calc', 'BillController@calc');
 Route:: get ('/results', 'BillController@results');

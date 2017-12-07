@@ -36,9 +36,22 @@ class MoneyController extends Controller
 $balance = new Balance();
 $balance->balance = $request->input('balance');
   $balance->date = $request->input('date');
-
 $balance->save();
+}
 
+public function bills(Request $request)
+{
+$this->validate($request, [
+'amount' => 'required|min:1|numeric',
+  'due' => 'required|min:1',
+    'source' => 'required|min:1',
+]);
+$bill = new bill();
+$bill->amount = $request->input('amount');
+$bill->due = $request->input('due');
+$bill->source = $request->input('source');
+$bill->paid = $request->input('paid');
+$bill->save();
 }
 
 public function practice6()
@@ -55,6 +68,5 @@ public function practice6()
 
     dump($balance->toArray());
 }
-
 
 }
