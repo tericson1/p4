@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Balance;
 use App\Bill;
 use App\Income;
-use Carbon\Carbon;
 
 class MoneyController extends Controller
 {
@@ -16,16 +15,13 @@ class MoneyController extends Controller
     $bills = Bill::orderBy('amount')->get();
     $incomes = Income::orderBy('amount')->get();
     $result = Balance::orderBy('updated_at','desc')->first();
-    $result2s = Bill::where('paid', '=', '0')->get();
-    $result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
 
         return view('balance')->with([
             'balances' => $balances,
           'bills' => $bills,
             'incomes' => $incomes,
     'result' => $result,
-  'result2s' => $result2s,
-  'result3s' => $result3s,
+
     ]);
   }
 
@@ -35,6 +31,21 @@ class MoneyController extends Controller
 
   }
 
+  public function pastdata ()
+  {
+
+    $balances = Balance::orderBy('amount')->get();
+$bills = Bill::orderBy('amount')->get();
+$incomes = Income::orderBy('amount')->get();
+
+      return view('past')->with([
+          'balances' => $balances,
+          'bills' => $bills,
+              'incomes' => $incomes,
+
+          ]);
+    ##return view ('past');
+  }
 
   public function balanceval(Request $request)
   {
@@ -80,43 +91,12 @@ class MoneyController extends Controller
     return view ('blank');
   }
 
-  public function edit($id)
-  {
-      $balance = Balance::find($id);
-
-      if (!$balance) {
-          return redirect('/balance')->with('alert', 'Book not found');
-      }
-
-      return view('book.edit')->with(['balance' => $balance]);
-  }
-
-  public function pastdata ()
-  {
-
-    $balances = Balance::orderBy('amount')->get();
-$bills = Bill::orderBy('amount')->get();
-$incomes = Income::orderBy('amount')->get();
-
-      return view('past')->with([
-          'balances' => $balances,
-          'bills' => $bills,
-              'incomes' => $incomes,
-
-          ]);
-  }
-
-
   public function practice6()
   {
-$result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
-dump($result3->toArray());
-
-
-
-//bills that don't have paid checked in order of due date
+$result = Balance::orderBy('updated_at','desc')->first();
+  dump($result->toArray());
   return view ('blank')->with([
-    'result3' => $result3,
+    'result' => $result,
       ]);
   }
 

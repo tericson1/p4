@@ -52,7 +52,12 @@ input[type=text] {
 
 h1 {    text-align: center;
 font-family: "Tahoma";
-color:#3c763d !Important;
+color:#3c763d;
+}
+
+h2 {    text-align: center;
+font-family: "Tahoma";
+color:red !Important;
 }
 
 img {

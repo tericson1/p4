@@ -15,7 +15,7 @@
     //return view('welcome');
 //});
 
-Route::get ('/practice/{n?}', 'PracticeController@index');
+##Route::get ('/practice/{n?}', 'PracticeController@index');
 
 Route::get('/debugbar', function () {
 
@@ -37,11 +37,24 @@ Route::get('/env', function () {
     dump(config('app.debug'));
     dump(config('app.url'));
 });
+//
+ Route::get('/balval', 'MoneyController@index');
+Route::post('/balval', 'MoneyController@balanceval');
 
-Route::get('/balval', 'MoneyController@balanceval');
-Route::get('/bills', 'MoneyController@bills');
+
+Route::get('/bills', 'MoneyController@index');
+Route::post('/bills', 'MoneyController@bills');
+
+Route::get('/incomes', 'MoneyController@index');
+Route::post('/incomes', 'MoneyController@incomes');
+
+#Edit Balance
+Route::get('/balance/{id}/edit', 'MoneyController@edit'); #update
+Route::put('/balance/{id}', 'MoneyController@update');
+
 Route:: get ('/', 'MoneyController@index');
 Route:: get ('/calc', 'BillController@calc');
 Route:: get ('/results', 'BillController@results');
 Route:: get ('/calculate', 'BillController@calculate');
 Route:: get ('/past', 'MoneyController@pastdata');
+Route:: get ('/practice', 'MoneyController@practice6');
