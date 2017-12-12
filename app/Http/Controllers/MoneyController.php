@@ -15,7 +15,7 @@ class MoneyController extends Controller
   {$balances = Balance::orderBy('amount')->get();
     $bills = Bill::orderBy('amount')->get();
     $incomes = Income::orderBy('amount')->get();
-    $result = Balance::orderBy('updated_at','desc')->first();
+    $result = Balance::orderBy('date','desc')->first();
     $result2s = Bill::where('paid', '=', '0')->get();
     $result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
 
@@ -47,7 +47,10 @@ class MoneyController extends Controller
     $balance->date = $request->input('date');
     $balance->save();
 
-    return view('balance');
+      return redirect('/')->with('alert', 'The balance '.$request->input('amount').' was added.');
+
+
+
     ##return redirect('/balance')->with('alert', 'The amount '.$request->input('amount').' was added.');
   }
 
@@ -55,7 +58,7 @@ class MoneyController extends Controller
   {
     $this->validate($request, [
       'amount' => 'required|min:1|numeric',
-      'due' => 'required|min:1',
+      'due' => 'required|date',
       'source' => 'required|min:1',]);
     $bill = new Bill();
     $bill->amount = $request->input('amount');
@@ -63,21 +66,22 @@ class MoneyController extends Controller
     $bill->source = $request->input('source');
     $bill->paid = $request->input('paid');
     $bill->save();
-    return view ('blank');
+    return redirect('/')->with('alert', 'The bill '.$request->input('source').' was added.');
+
   }
 
   public function incomes(Request $request)
   {
     $this->validate($request, [
       'amount' => 'required|min:1|numeric',
-      'daterecieved' => 'required|min:1',
+      'daterecieved' => 'required|date',
       'source' => 'required|min:1',]);
     $income = new Income();
     $income->amount = $request->input('amount');
     $income->daterecieved = $request->input('daterecieved');
     $income->source = $request->input('source');
     $income->save();
-    return view ('blank');
+    return redirect('/')->with('alert', 'The income '.$request->input('source').' was added.');
   }
 
   public function edit($id)
