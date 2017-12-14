@@ -36,9 +36,10 @@
     <input type="text" id="paid" name="paid" value = '{{old ('paid', $bill ->paid)}}'>
   </div>
   <br>
-  <br>
+  <br><label for="categogories">Categories</label>
   @foreach ($categoriesForCheckboxes as $id => $name)
   <input
+  id ='categorie'
   type='checkbox'
   value='{{ $id }}'
   name='categories[]'
