@@ -48,9 +48,16 @@ Route::post('/bills', 'MoneyController@bills');
 Route::get('/incomes', 'MoneyController@index');
 Route::post('/incomes', 'MoneyController@incomes');
 
-#Edit Balance
-Route::get('/balance/{id}/edit', 'MoneyController@edit'); #update
-Route::put('/balance/{id}', 'MoneyController@update');
+#Edit Bill
+Route::get('/{id}/update', 'MoneyController@edit'); #update
+Route::put('/{id}', 'MoneyController@update');
+
+Route::get('/{id}/delete', 'MoneyController@delete');
+Route::delete('/{id}', 'MoneyController@remove');
+
+
+
+#catgorize bills
 
 Route:: get ('/', 'MoneyController@index');
 Route:: get ('/calc', 'BillController@calc');

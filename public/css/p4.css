@@ -55,9 +55,27 @@ font-family: "Tahoma";
 color:#3c763d;
 }
 
+
+.alert {
+    background-color:green;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    padding:5px;
+    font-weight:bold;
+    text-align:center;
+    cursor:pointer;
+}
+
 h2 {    text-align: center;
 font-family: "Tahoma";
 color:red !Important;
+}
+
+h3 {    text-align: center;
+font-family: "Tahoma";
+color:blue !Important;
 }
 
 img {

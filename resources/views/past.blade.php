@@ -24,9 +24,9 @@
 <br>
 <br>
 
-</div> --> 
+</div> -->
 <div class="column2">
-<h2>Paid Bills Listing</h2>
+<h2>Edit Bills</h2>
 <br>
 <br>
 @foreach($bills as $bill)
@@ -37,7 +37,8 @@
 <!-- <p>{{ $balance['date'] }}</p>
 <a href='/{{ $balance['id'] }}/edit'>Edit - update</a>
         <a href='/{{ $balance['id'] }}/delete'>Delete - update</a> -->
-
+<a href='/{{ $bill['id'] }}/update'>Update</a>
+<a href='/{{ $bill['id'] }}/delete'>Delete</a>
   @endforeach
 <br>
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Bills;
+use App\Bill;
 
 class BillsTableSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class BillsTableSeeder extends Seeder
        $count = count($Bills);
 
        foreach ($Bills as $key => $Bills) {
-           Bills::insert([
+           Bill::insert([
                'created_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                'source'=>$Bills[0],

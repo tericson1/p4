@@ -19,13 +19,13 @@ class MoneyController extends Controller
     $result2s = Bill::where('paid', '=', '0')->get();
     $result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
 
-        return view('balance')->with([
-            'balances' => $balances,
-          'bills' => $bills,
-            'incomes' => $incomes,
-    'result' => $result,
-  'result2s' => $result2s,
-  'result3s' => $result3s,
+    return view('balance')->with([
+      'balances' => $balances,
+      'bills' => $bills,
+      'incomes' => $incomes,
+      'result' => $result,
+      'result2s' => $result2s,
+      'result3s' => $result3s,
     ]);
   }
 
@@ -47,7 +47,7 @@ class MoneyController extends Controller
     $balance->date = $request->input('date');
     $balance->save();
 
-      return redirect('/')->with('alert', 'The balance '.$request->input('amount').' was added.');
+    return redirect('/')->with('alert', 'The balance '.$request->input('amount').' was added.');
 
 
 
@@ -60,69 +60,106 @@ class MoneyController extends Controller
       'amount' => 'required|min:1|numeric',
       'due' => 'required|date',
       'source' => 'required|min:1',]);
-    $bill = new Bill();
-    $bill->amount = $request->input('amount');
-    $bill->due = $request->input('due');
-    $bill->source = $request->input('source');
-    $bill->paid = $request->input('paid');
-    $bill->save();
-    return redirect('/')->with('alert', 'The bill '.$request->input('source').' was added.');
+      $bill = new Bill();
+      $bill->amount = $request->input('amount');
+      $bill->due = $request->input('due');
+      $bill->source = $request->input('source');
+      $bill->paid = $request->input('paid');
+      $bill->save();
+      return redirect('/')->with('alert', 'The bill '.$request->input('source').' was added.');
 
-  }
+    }
 
-  public function incomes(Request $request)
-  {
-    $this->validate($request, [
-      'amount' => 'required|min:1|numeric',
-      'daterecieved' => 'required|date',
-      'source' => 'required|min:1',]);
-    $income = new Income();
-    $income->amount = $request->input('amount');
-    $income->daterecieved = $request->input('daterecieved');
-    $income->source = $request->input('source');
-    $income->save();
-    return redirect('/')->with('alert', 'The income '.$request->input('source').' was added.');
-  }
-
-  public function edit($id)
-  {
-      $balance = Balance::find($id);
-
-      if (!$balance) {
-          return redirect('/balance')->with('alert', 'Book not found');
+    public function incomes(Request $request)
+    {
+      $this->validate($request, [
+        'amount' => 'required|min:1|numeric',
+        'daterecieved' => 'required|date',
+        'source' => 'required|min:1',]);
+        $income = new Income();
+        $income->amount = $request->input('amount');
+        $income->daterecieved = $request->input('daterecieved');
+        $income->source = $request->input('source');
+        $income->save();
+        return redirect('/')->with('alert', 'The income '.$request->input('source').' was added.');
       }
 
-      return view('book.edit')->with(['balance' => $balance]);
-  }
+      public function edit($id)
+      {
+        $bill = Bill::find($id);
 
-  public function pastdata ()
-  {
+        if (!$bill) {
+          return redirect('/balance')->with('alert', 'Bill not found');
+        }
 
-    $balances = Balance::orderBy('amount')->get();
-$bills = Bill::orderBy('amount')->get();
-$incomes = Income::orderBy('amount')->get();
+        return view('update')->with(['bill' => $bill]);
+      }
 
-      return view('past')->with([
+      public function update(Request $request, $id)
+ {
+   $this->validate($request, [
+     'amount' => 'required|min:1|numeric',
+     'due' => 'required|date',
+     'source' => 'required|min:1',]);
+
+     $bill = Bill::find($id);
+     $bill->categories()->sync($request->input('categories'));
+     $bill->amount = $request->input('amount');
+     $bill->due = $request->input('due');
+     $bill->source = $request->input('source');
+     $bill->paid = $request->input('paid');
+     $bill->save();
+     return redirect('/'.$id.'/update')->with('alert', 'Your changes were saved.');
+ }
+
+      public function delete (Request $request, $id)
+      {
+        $bill = Bill::find($id);
+        if (!$bill) {
+          return redirect('/balance')->with('alert', 'Bill not found');
+        }
+        return view('delete')->with(['bill' => $bill]);
+      }
+
+      public function remove(Request $request, $id)
+      {
+        $bill = Bill::find($id);
+        if (!$bill) {
+          return redirect('/balance')->with('alert', 'Bill not found');
+        }
+        $bill->categories()->detach();
+        $bill->delete();
+        return redirect('/balance')->with('alert', 'The bill has been deleted.');
+      }
+
+      public function pastdata ()
+      {
+
+        $balances = Balance::orderBy('amount')->get();
+        $bills = Bill::orderBy('amount')->get();
+        $incomes = Income::orderBy('amount')->get();
+
+        return view('past')->with([
           'balances' => $balances,
           'bills' => $bills,
-              'incomes' => $incomes,
+          'incomes' => $incomes,
 
-          ]);
-  }
-
-
-  public function practice6()
-  {
-$result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
-dump($result3->toArray());
+        ]);
+      }
 
 
-
-//bills that don't have paid checked in order of due date
-  return view ('blank')->with([
-    'result3' => $result3,
-      ]);
-  }
+      public function practice6()
+      {
+        $result3s = Income::where('daterecieved', '>=', Carbon::today())->get();
+        dump($result3->toArray());
 
 
-}
+
+        //bills that don't have paid checked in order of due date
+        return view ('blank')->with([
+          'result3' => $result3,
+        ]);
+      }
+
+
+    }

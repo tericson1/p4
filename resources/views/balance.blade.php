@@ -72,12 +72,13 @@
       </div>
       <br>
       <div>
-        <label for="due">Date Due <strong>REQUIRED</strong> </label>
+        <label for="due">Date Due <strong>REQUIRED</strong> Format:YYYY-MM-DD </label>
         <input type="text" id="due" name="due">
       </div>
       <br>
+			
       <div>
-        <label for="paid">Paid</label>
+        <label for="paid">Paid **Enter 0 for NO, 1 for YES**</label>
         <input type="text" id="paid" name="paid"  />
       </div>
       <br>
@@ -132,15 +133,13 @@
 		@foreach($result2s as $result2)
 
 
-		          <p>Source: {{ $result2['source'] }}|Amount: {{ $result2['amount'] }} | Date Due: {{ $result2['due'] }} | <a href='/update'>Update</a></p>
+		          <p>Source: {{ $result2['source'] }}|Amount: {{ $result2['amount'] }} | Date Due: {{ $result2['due'] }} |
+
+							</p>
 
 		  @endforeach
-
-
 			  <h2>Total Unpaid Bills: ${{  $result2->sum('amount')  }} </h2>
 
-
-    <br>
     <h2>Planned Income</h2>
     <br>
  @foreach($result3s as $result3)

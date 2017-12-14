@@ -9,13 +9,19 @@
 	<meta charset='utf-8'>
 
 
-<link href="/css/p3.css" type='text/css' rel='stylesheet'>
+<link href="/css/p4.css" type='text/css' rel='stylesheet'>
 
 
     @stack('head')
 
 </head>
 <body>
+
+    @if(session('alert'))
+        <div class='alert'>
+            {{ session('alert') }}
+        </div>
+    @endif
 
 	<header>
 		 <h1> Money Forecasting Tool </h1>

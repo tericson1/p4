@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Incomes;
+use App\Income;
 
 class IncomesTableSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class IncomesTableSeeder extends Seeder
        $count = count($Incomes);
 
        foreach ($Incomes as $key => $Incomes) {
-           Incomes::insert([
+           Income::insert([
                'created_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                'source'=>$Incomes[0],

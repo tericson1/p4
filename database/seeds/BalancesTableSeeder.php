@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Balances;
+use App\Balance;
 
 class BalancesTableSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class BalancesTableSeeder extends Seeder
        $count = count($Balances);
 
        foreach ($Balances as $key => $Balances) {
-           Balances::insert([
+           Balance::insert([
                'created_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
             'amount'=>$Balances[0],
