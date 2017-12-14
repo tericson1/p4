@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @push('head')
-    <link href='/css/p4.css' rel='stylesheet'>
+<link href='/css/p4.css' rel='stylesheet'>
 @endpush
 
 @section('content')
@@ -12,10 +12,10 @@
 <form method='POST' action='/{{$bill->id}}'>
   {{ method_field('put') }}
 
-          {{ csrf_field() }}
+  {{ csrf_field() }}
 
 
-    <div>
+  <div>
     <br>
     <label for="amount">Bll Total Amount <strong>REQUIRED</strong> </label>
     <input type="text" id="amount" name="amount" value = '{{old ('amount', $bill ->amount)}}'>
@@ -36,19 +36,20 @@
     <input type="text" id="paid" name="paid" value = '{{old ('paid', $bill ->paid)}}'>
   </div>
   <br>
+  <br>
   @foreach ($categoriesForCheckboxes as $id => $name)
-      <input
-          type='checkbox'
-          value='{{ $id }}'
-          name='categories[]'
-       {{ (isset($categoriesForThisBill) and in_array($name, $categoriesForThisBill)) ? 'CHECKED' : '' }}
-      >
-      {{ $name }} <br>
+  <input
+  type='checkbox'
+  value='{{ $id }}'
+  name='categories[]'
+  {{ (isset($categoriesForThisBill) and in_array($name, $categoriesForThisBill)) ? 'CHECKED' : '' }}
+  >
+  {{ $name }} <br>
   @endforeach
   <br>
   <input type = 'submit' class = 'btn btn-primary btn-small' value = 'Enter'>
-<br>
-<br>
+  <br>
+  <br>
 
 </form>
 
