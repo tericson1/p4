@@ -148,6 +148,7 @@ class MoneyController extends Controller
         }
         $bill->categories()->detach();
         $bill->delete();
+
         return redirect('/'.$id.'/delete')->with('alert', 'The bill has been deleted.');
       }
 
