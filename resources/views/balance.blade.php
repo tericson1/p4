@@ -76,7 +76,7 @@
         <input type="text" id="due" name="due">
       </div>
       <br>
-			
+
       <div>
         <label for="paid">Paid **Enter 0 for NO, 1 for YES**</label>
         <input type="text" id="paid" name="paid"  />
@@ -138,7 +138,9 @@
 							</p>
 
 		  @endforeach
-			  <h2>Total Unpaid Bills: ${{  $result2->sum('amount')  }} </h2>
+			  <h2>Total Unpaid Bills: ${{  $result2s->sum('amount')  }} </h2>
+
+
 
     <h2>Planned Income</h2>
     <br>
@@ -147,11 +149,12 @@
 
 <p>Source: {{ $result3['source'] }}|Amount: {{ $result3['amount'] }} | Planned Recieval Date: {{ $result3['daterecieved'] }}</p>
 	@endforeach
-<h2>Total Expected Income: ${{  $result3->sum('amount')  }} </h2>
+<h2>Total Expected Income: ${{  $result3s->sum('amount')  }} </h2>
 
     <br>
     <br>
-    <h2>Amount of Free Spendable Cash: ${{  $result3->sum('amount') - $result2->sum('amount') }}  </h2>
+    <h2>Amount of Free Spendable Cash: ${{  $resulttotals }}  </h2>
+
 
   </div>
 </div>
